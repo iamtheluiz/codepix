@@ -35,11 +35,13 @@ type Transactions struct {
 type Transaction struct {
 	Base              `valid:"required"`
 	AccountFrom       *Account `valid:"-"`
-	Amount            float64  `json:"amount" valid:"notnull"`
+	AccountFromID     string   `gorm:"column:account_from_id;type:uuid;" valid:"notnull"`
+	Amount            float64  `json:"amount" gorm:"type:float" valid:"notnull"`
 	PixKeyTo          *PixKey  `valid:"-"`
-	Status            string   `json:"status" valid:"notnull"`
-	Description       string   `json:"description" valid:"notnull"`
-	CancelDescription string   `json:"cancel_description" valid:"-"`
+	PixKeyIdTo        string   `gorm:"column:pix_key_id_to;type:uuid;" valid:"not null"`
+	Status            string   `json:"status" gorm:"type:varchar(20)" valid:"notnull"`
+	Description       string   `json:"description" gorm:"type:varchar(255)" valid:"notnull"`
+	CancelDescription string   `json:"cancel_description" gorm:"type:varchar(255)" valid:"-"`
 }
 
 // Bank validation method
@@ -65,16 +67,22 @@ func (t *Transaction) isValid() error {
 }
 
 // NewTransaction => Create a new Transaction
-func NewTransaction(accountFrom *Account, amount float64, pixKeyTo *PixKey, description string) (*Transaction, error) {
+func NewTransaction(accountFrom *Account, amount float64, pixKeyTo *PixKey, description string, id string) (*Transaction, error) {
 	transaction := Transaction{
-		AccountFrom: accountFrom,
-		Amount:      amount,
-		PixKeyTo:    pixKeyTo,
-		Status:      TransactionPending,
-		Description: description,
+		AccountFrom:   accountFrom,
+		AccountFromID: accountFrom.ID,
+		Amount:        amount,
+		PixKeyTo:      pixKeyTo,
+		PixKeyIdTo:    pixKeyTo.ID,
+		Status:        TransactionPending,
+		Description:   description,
 	}
 
-	transaction.ID = uuid.NewV4().String()
+	if id == "" {
+		transaction.ID = uuid.NewV4().String()
+	} else {
+		transaction.ID = id
+	}
 	transaction.CreatedAt = time.Now()
 
 	err := transaction.isValid()
