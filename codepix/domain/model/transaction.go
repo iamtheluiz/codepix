@@ -64,8 +64,8 @@ func (t *Transaction) isValid() error {
 	return nil
 }
 
-// NexTransaction => Create a new Transaction
-func NexTransaction(accountFrom *Account, amount float64, pixKeyTo *PixKey, description string) (*Transaction, error) {
+// NewTransaction => Create a new Transaction
+func NewTransaction(accountFrom *Account, amount float64, pixKeyTo *PixKey, description string) (*Transaction, error) {
 	transaction := Transaction{
 		AccountFrom: accountFrom,
 		Amount:      amount,
