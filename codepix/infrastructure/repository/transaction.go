@@ -1,6 +1,9 @@
+package repository
+
 import (
 	"fmt"
-	"github.com/codeedu/imersao/codepix-go/domain/model"
+
+	"github.com/iamtheluiz/codepix/codepix-go/domain/model"
 	"github.com/jinzhu/gorm"
 )
 

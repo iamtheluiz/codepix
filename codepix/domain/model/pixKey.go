@@ -17,6 +17,10 @@ type PixKeyRepositoryInterface interface {
 	FindAccount(id string) (*Account, error)
 }
 
+func init() {
+	govalidator.SetFieldsRequiredByDefault(true)
+}
+
 // PixKey Data Structure
 type PixKey struct {
 	Base      `valid:"required"`

@@ -44,6 +44,10 @@ type Transaction struct {
 	CancelDescription string   `json:"cancel_description" gorm:"type:varchar(255)" valid:"-"`
 }
 
+func init() {
+	govalidator.SetFieldsRequiredByDefault(true)
+}
+
 // Bank validation method
 func (t *Transaction) isValid() error {
 	_, err := govalidator.ValidateStruct(t)

@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/iamtheluiz/codepix/codepix-go/domain/model"
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
 )
 
 // PixKeyRepositoryDb => Repository Interface
