@@ -9,7 +9,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { BankAccount } from './models/bank-account.module';
+import { PixKey } from './models/pix-key.module';
 import { BankAccountController } from './controllers/bank-account/bank-account.controller';
+import { PixKeyController } from './controllers/pix-key/pix-key.controller';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -22,11 +26,22 @@ import { BankAccountController } from './controllers/bank-account/bank-account.c
       username: process.env.TYPEORM_USERNAME,
       password: process.env.TYPEORM_PASSWORD,
       database: process.env.TYPEORM_DATABASE,
-      entities: [BankAccount],
+      entities: [BankAccount, PixKey],
     }),
-    TypeOrmModule.forFeature([BankAccount]),
+    TypeOrmModule.forFeature([BankAccount, PixKey]),
+    ClientsModule.register([
+      {
+        name: 'CODEPIX_PACKAGE',
+        transport: Transport.GRPC,
+        options: {
+          url: process.env.GRPC_URL,
+          package: 'github.com.iamtheluiz.codepix',
+          protoPath: [join(__dirname, 'protofiles/pixkey.proto')],
+        },
+      },
+    ]),
   ],
-  controllers: [AppController, BankAccountController],
+  controllers: [AppController, BankAccountController, PixKeyController],
   providers: [AppService, FixturesCommand],
 })
 export class AppModule {}
