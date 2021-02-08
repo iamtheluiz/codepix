@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, ParseUUIDPipe } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BankAccount } from 'src/models/bank-account.module';
@@ -15,6 +15,11 @@ export class BankAccountController {
     return this.bankAccountRepo.find();
   }
 
-  @Get()
-  show() {}
+  @Get(':bankAccountId')
+  show(
+    @Param('bankAccountId', new ParseUUIDPipe({ version: '4' }))
+    bankAccountId: string,
+  ) {
+    return this.bankAccountRepo.findOneOrFail(bankAccountId);
+  }
 }
