@@ -18,8 +18,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PixKeyExistsDto } from 'src/dto/pix-key-exists.dto';
 import { PixKeyDto } from 'src/dto/pix-key.dto';
 import { PixService } from 'src/grpc-types/pix-service.grpc.';
-import { BankAccount } from 'src/models/bank-account.module';
-import { PixKey } from 'src/models/pix-key.module';
+import { BankAccount } from 'src/models/bank-account.model';
+import { PixKey } from 'src/models/pix-key.model';
 import { Repository } from 'typeorm';
 
 @Controller('bank-accounts/:bankAccountId/pix-keys')

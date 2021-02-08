@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { v4 as uuidv4 } from 'uuid';
-import { BankAccount } from './bank-account.module';
+import { BankAccount } from './bank-account.model';
 
 export enum PixKeyKind {
   cpf = 'cpf',

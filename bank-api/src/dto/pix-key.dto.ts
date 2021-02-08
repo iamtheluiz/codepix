@@ -1,5 +1,5 @@
 import { IsIn, IsNotEmpty, IsString } from 'class-validator';
-import { PixKeyKind } from 'src/models/pix-key.module';
+import { PixKeyKind } from 'src/models/pix-key.model';
 
 export class PixKeyDto {
   @IsString()

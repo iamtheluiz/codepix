@@ -8,8 +8,8 @@ import { FixturesCommand } from './fixtures/fixtures.command';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { BankAccount } from './models/bank-account.module';
-import { PixKey } from './models/pix-key.module';
+import { BankAccount } from './models/bank-account.model';
+import { PixKey } from './models/pix-key.model';
 import { BankAccountController } from './controllers/bank-account/bank-account.controller';
 import { PixKeyController } from './controllers/pix-key/pix-key.controller';
 import { ClientsModule, Transport } from '@nestjs/microservices';
