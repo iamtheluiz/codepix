@@ -6,6 +6,7 @@ import { ModelNotFoundExceptionFilter } from './exception-filters/model-not-foun
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
+  app.enableCors();
 
   // Exception Filters
   app.useGlobalFilters(new ModelNotFoundExceptionFilter());
