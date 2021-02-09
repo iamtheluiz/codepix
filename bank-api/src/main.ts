@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 import { ModelNotFoundExceptionFilter } from './exception-filters/model-not-found.exception-filter';
 
@@ -8,6 +9,25 @@ async function bootstrap() {
 
   // Exception Filters
   app.useGlobalFilters(new ModelNotFoundExceptionFilter());
+
+  console.log(process.env.BANK_CODE);
+
+  app.connectMicroservice({
+    transport: Transport.KAFKA,
+    options: {
+      client: {
+        brokers: [process.env.KAFKA_BROKER],
+      },
+      consumer: {
+        groupId:
+          !process.env.KAFKA_CONSUMER_GROUP_ID ||
+          process.env.KAFKA_CONSUMER_GROUP_ID === ''
+            ? 'my-consumer-' + Math.random()
+            : process.env.KAFKA_CONSUMER_GROUP_ID,
+      },
+    },
+  });
+  app.startAllMicroservices();
 
   await app.listen(3000);
 }
