@@ -12,7 +12,7 @@ Codepix é um programa desenvolvido na "Imersão Full Stack && Full Cycle" da [F
   <img alt="Next.js" src="https://img.shields.io/badge/-Next.js-44475a?logo=next.js&logoColor=white" />
   <img alt="NestJS" src="https://img.shields.io/badge/-NestJS-44475a?logo=nestjs&logoColor=white" />
   <img alt="PostgreSQL" src="https://img.shields.io/badge/-PostgreSQL-44475a?logo=postgresql&logoColor=white" />
-  <img alt="Apache Kafka" src="https://img.shields.io/badge/-Apache Kafka-44475a?logo=apache kafka&logoColor=white" />
+  <img alt="Apache Kafka" src="https://img.shields.io/badge/-Apache Kafka-44475a?logo=apache-kafka&logoColor=white" />
   <img alt="Docker" src="https://img.shields.io/badge/-Docker-44475a?logo=docker&logoColor=white" />
 </p>
 
